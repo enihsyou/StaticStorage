@@ -12,3 +12,9 @@
 - [Cloudflare DNS](https://www.cloudflare.com/)
 - [jsDeliver](https://www.jsdelivr.com/)
 - [PicGo](https://picgo.github.io/)
+
+---
+
+## 目录结构
+
+- [Blog](Blog) 用于个人博客的资源。

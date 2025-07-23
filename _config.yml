@@ -1,0 +1,7 @@
+# These directories will be listed in the directory listing
+directory_listing_dirs:
+  - Blog
+
+plugins:
+  # required by jekyll-theme-primer to function, which is the default theme.
+  - jekyll-seo-tag

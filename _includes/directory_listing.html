@@ -33,11 +33,27 @@
   flex: 0 0 180px;
   text-align: right;
 }
+
+@media (prefers-color-scheme: dark) {
+  body, .dir-listing-container {
+    background: #181818;
+    color: #e0e0e0;
+  }
+  .dir-listing-header {
+    background: #222;
+    color: #e0e0e0;
+  }
+  .dir-listing-row {
+    border-bottom: 1px solid #333;
+  }
+  .dir-listing-cell a {
+    color: #90caf9;
+  }
+}
 </style>
 <div class="dir-listing-container">
   <div class="dir-listing-header">
     <div class="dir-listing-cell filename">文件名</div>
-    <div class="dir-listing-cell size">大小</div>
     <div class="dir-listing-cell time">最后修改时间</div>
   </div>
   {% assign files_in_dir = site.static_files | where_exp: "file", "file.path contains include.directory" %}
@@ -45,9 +61,6 @@
     <div class="dir-listing-row">
       <div class="dir-listing-cell filename">
         <a href="{{ static_file.path }}" target="_blank">{{ static_file.name }}</a>
-      </div>
-      <div class="dir-listing-cell size">
-        {% if static_file.size %}{{ static_file.size | divided_by: 1024.0 | round: 2 }} KB{% else %}-{% endif %}
       </div>
       <div class="dir-listing-cell time">
         {% if static_file.modified_time %}{{ static_file.modified_time | date: "%Y-%m-%d %H:%M" }}{% else %}-{% endif %}
