@@ -1,0 +1,57 @@
+<!-- Directory listing for static files
+  参数说明：
+  directory —— 需要列出文件的目录（相对于站点根目录的路径）。
+-->
+
+<style>
+.dir-listing-container {
+  width: 100%;
+  font-size: 15px;
+}
+.dir-listing-header, .dir-listing-row {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+}
+.dir-listing-header {
+  background: #f0f0f0;
+  font-weight: bold;
+}
+.dir-listing-cell {
+  padding: 8px;
+}
+.dir-listing-cell.filename {
+  flex: 1 1 0;
+  min-width: 120px;
+  word-break: break-all;
+}
+.dir-listing-cell.size {
+  flex: 0 0 120px;
+  text-align: right;
+}
+.dir-listing-cell.time {
+  flex: 0 0 180px;
+  text-align: right;
+}
+</style>
+<div class="dir-listing-container">
+  <div class="dir-listing-header">
+    <div class="dir-listing-cell filename">文件名</div>
+    <div class="dir-listing-cell size">大小</div>
+    <div class="dir-listing-cell time">最后修改时间</div>
+  </div>
+  {% assign files_in_dir = site.static_files | where_exp: "file", "file.path contains include.directory" %}
+  {% for static_file in files_in_dir %}
+    <div class="dir-listing-row">
+      <div class="dir-listing-cell filename">
+        <a href="{{ static_file.path }}" target="_blank">{{ static_file.name }}</a>
+      </div>
+      <div class="dir-listing-cell size">
+        {% if static_file.size %}{{ static_file.size | divided_by: 1024.0 | round: 2 }} KB{% else %}-{% endif %}
+      </div>
+      <div class="dir-listing-cell time">
+        {% if static_file.modified_time %}{{ static_file.modified_time | date: "%Y-%m-%d %H:%M" }}{% else %}-{% endif %}
+      </div>
+    </div>
+  {% endfor %}
+</div>
