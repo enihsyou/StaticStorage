@@ -2,6 +2,6 @@
 directory_listing_dirs:
   - Blog
 
-plugins:
-  # required by jekyll-theme-primer to function, which is the default theme.
-  - jekyll-seo-tag
+# the default 'jekyll-theme-primer' theme occasionally throw this exception, we are switch away from that.
+# Liquid Exception: '@Jekyll::GitHubMetadata::EditLinkTag#parts' is not allowed as an instance variable name in /_layouts/default.html
+theme: jekyll-theme-minimal
