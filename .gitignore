@@ -4,5 +4,7 @@
 
 .bundle/
 vendor/
+# to avoid platform specific issues
+Gemfile.lock
 
 _site/
