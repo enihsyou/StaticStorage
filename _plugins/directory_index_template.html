@@ -1,0 +1,89 @@
+<!-- Directory listing for static files
+  参数说明：
+  directory —— 需要列出文件的目录（相对于站点根目录的路径）。
+-->
+<html>
+
+<head>
+  <style>
+    .dir-listing-container {
+      margin: 0 2%;
+    }
+
+    .dir-listing-header,
+    .dir-listing-row {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #eee;
+    }
+
+    .dir-listing-header {
+      background: #f0f0f0;
+      font-weight: bold;
+    }
+
+    .dir-listing-cell {
+      padding: 8px;
+    }
+
+    .dir-listing-cell.filename {
+      flex: 1 1 0;
+      min-width: 8rem;
+      word-break: break-all;
+    }
+
+    .dir-listing-cell.size {
+      flex: 0 0 8rem;
+      text-align: right;
+    }
+
+    .dir-listing-cell.time {
+      flex: 0 0 12rem;
+      text-align: right;
+    }
+
+    @media (prefers-color-scheme: dark) {
+
+      body,
+      .dir-listing-container {
+        background: #181818;
+        color: #e0e0e0;
+      }
+
+      .dir-listing-header {
+        background: #222;
+        color: #e0e0e0;
+      }
+
+      .dir-listing-row {
+        border-bottom: 1px solid #333;
+      }
+
+      .dir-listing-cell a {
+        color: #90caf9;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="dir-listing-container">
+    <div class="dir-listing-header">
+      <div class="dir-listing-cell filename">文件名</div>
+      <div class="dir-listing-cell time">最后修改时间</div>
+    </div>
+    {% assign files_in_dir = site.static_files | where_exp: "file", "file.path contains page.directory" %}
+    {% for static_file in files_in_dir %}
+    <div class="dir-listing-row">
+      <div class="dir-listing-cell filename">
+        <a href="{{ static_file.path }}" target="_blank">{{ static_file.name }}</a>
+      </div>
+      <div class="dir-listing-cell time">
+        {% if static_file.modified_time %}{{ static_file.modified_time | date: "%Y-%m-%d %H:%M" }}{% else %}-{% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</body>
+
+</html>

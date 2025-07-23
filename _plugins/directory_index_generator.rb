@@ -18,9 +18,9 @@ module DirectoryIndexPlugin
       @name = 'index.html'
 
       self.process(@name)
-      self.read_yaml(File.join(base, '_includes'), 'directory_listing.html')
+      self.read_yaml(File.join(base, '_plugins'), 'directory_index_template.html')
       self.data['layout'] = nil
-      self.content = "{% include directory_listing.html directory='#{dir}' %}"
+      self.data['directory'] = dir
     end
   end
 end
