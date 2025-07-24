@@ -1,10 +1,13 @@
 <!-- Directory listing for static files
   参数说明：
-  directory —— 需要列出文件的目录（相对于站点根目录的路径）。
+  page.directory —— The path segment must starts with.
 -->
-<html>
+<html lang="{{ site.lang | default: " en-US" }}">
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <style>
     .dir-listing-container {
       margin: 0 2%;
@@ -23,7 +26,7 @@
     }
 
     .dir-listing-cell {
-      padding: 8px;
+      padding: 0.5rem;
     }
 
     .dir-listing-cell.filename {
@@ -69,8 +72,8 @@
 <body>
   <div class="dir-listing-container">
     <div class="dir-listing-header">
-      <div class="dir-listing-cell filename">文件名</div>
-      <div class="dir-listing-cell time">最后修改时间</div>
+      <div class="dir-listing-cell filename">File Name</div>
+      <div class="dir-listing-cell time">Last Modified Time</div>
     </div>
     {% assign files_in_dir = site.static_files | where_exp: "file", "file.path contains page.directory" %}
     {% for static_file in files_in_dir %}
@@ -79,7 +82,7 @@
         <a href="{{ static_file.path }}" target="_blank">{{ static_file.name }}</a>
       </div>
       <div class="dir-listing-cell time">
-        {% if static_file.modified_time %}{{ static_file.modified_time | date: "%Y-%m-%d %H:%M" }}{% else %}-{% endif %}
+        {% if static_file.last_modified_at %}{{ static_file.last_modified_at | date: "%Y-%m-%d %H:%M" }}{% else %}-{% endif %}
       </div>
     </div>
     {% endfor %}

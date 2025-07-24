@@ -1,6 +1,9 @@
+# site.lang custom variable is read by jekyll-theme-minimal
+lang: zh-CN
+
 # These directories will be listed in the directory listing
 directory_listing_dirs:
-  - Blog
+  - /Blog
 
 # the default 'jekyll-theme-primer' theme occasionally throw this exception, we are switch away from that.
 # Liquid Exception: '@Jekyll::GitHubMetadata::EditLinkTag#parts' is not allowed as an instance variable name in /_layouts/default.html
